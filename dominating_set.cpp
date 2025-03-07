@@ -1,5 +1,7 @@
 #include<bits/stdc++.h>
 #include<vector>
+#include "test-kit.cpp"
+
 using namespace std;
 
 class Solution {
@@ -114,7 +116,7 @@ public:
     vector<int> set;
     initList(adj_list);
 
-    show_stats();
+    // show_stats();
 
     int rem = adj_list.size();
     while (rem > 0) {
@@ -123,7 +125,7 @@ public:
       if (cur_node == -1) break;
       int new_visit = dominate(cur_node);
 
-      show_stats(cur_node);
+      // show_stats(cur_node);
       if (new_visit > 0) {
         set.push_back(cur_node);
         rem -= new_visit;
@@ -211,6 +213,10 @@ int main() {
   cout<<"\ndominating set: ";
   for(int d: d_set) cout<<d<<" ";
   cout<<endl;
+
+  TestKit tk;
+  cout<<"verification of minimality:\n "<<tk.isMinimalSet(adj, d_set)<<"\n";
+  cout<<"verification of domination: "<<tk.isDominatingSet(adj, d_set);
 
   return 0;
 }
