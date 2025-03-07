@@ -46,10 +46,10 @@ public:
   }
 
   bool isMinimumSet(const vector<vector<int>>& adj_list, const vector<int>& vertex_set) {
-    // if(adj_list.size() > 25) {
-    //   cout<<"File too large ";
-    //   return true;
-    // }  
+    if(adj_list.size() > 25) {
+      cout<<"File too large ";
+      return true;
+    }  
     
     vector<int> subset;
       status = true;
@@ -67,7 +67,7 @@ public:
         temp_set.erase(temp_set.begin() + i); // Remove one element
 
         if (isDominatingSet(adj_list, temp_set)) {
-          cout<<" Found smaller set, remove { "<<vertex_set[i]<<" }";
+          cout<<" Found smaller set, remove {"<<vertex_set[i]<<"}";
           
           return false; // Not minimal since a smaller set still dominates
         }

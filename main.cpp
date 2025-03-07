@@ -72,6 +72,7 @@ void printGraph(const vector<vector<int>> &adj) { // Use 'const' to prevent modi
 int main() {
   vector<vector<int>> adj;
   inputGraphFile(adj);
+  // printGraph(adj);
 
   Solution sol;
   vector<int> d_set = sol.dominatingSet(adj);

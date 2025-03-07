@@ -52,6 +52,9 @@ class Solution {
 
     for (int i = 0; i < v; i++) {
       for (int adj_node : adj_list[i]) {
+        if(adj_node == i) cout<<"self-loop\n";
+        if(adj[i].find(adj_node) != adj[i].end()) cout<<"multipath\n";
+
         adj[i].insert(adj_node);
         in_adj[adj_node].push_back(i);
       }
