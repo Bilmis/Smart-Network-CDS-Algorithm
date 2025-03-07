@@ -5,7 +5,8 @@ class Solution {
   vector<unordered_set<int>> adj;
   vector<vector<int>> in_adj;
   vector<bool> visited;
-  vector<int> bucket, degree;
+  vector<int> bucket, degree, rank;
+  int max_degree=0;
 
   void show_stats(int val = -1) {
     cout<<"-------------------------------\n";
@@ -30,9 +31,9 @@ class Solution {
       cout << endl;
     }
 
-    cout<<"\nver\tvis\tdeg\tbuc\n";
+    cout<<"\nver\tvis\tdeg\tbuc\trank\n";
     for(size_t i=0; i<adj.size(); i++) {
-      cout<<i<<"\t"<<visited[i]<<"\t"<<degree[i]<<"\t"<<bucket[i]<<endl;
+      cout<<i<<"\t"<<visited[i]<<"\t"<<degree[i]<<"\t"<<bucket[i]<<"\t"<<rank[i]<<endl;
     }
 
     cout<<endl;
@@ -43,6 +44,8 @@ class Solution {
 
     degree = vector<int>(v);
     bucket = vector<int>(v);
+    rank = vector<int>(v);
+
     visited = vector<bool>(v, false);
     adj = vector<unordered_set<int>>(v);
     in_adj = vector<vector<int>>(v);
@@ -53,9 +56,10 @@ class Solution {
         in_adj[adj_node].push_back(i);
       }
       degree[i] = adj_list[i].size();
+      max_degree = max(max_degree, degree[i]);
     }
 
-    updateBucket();
+    updateRank();
   }
 
   int visit(int node) {
@@ -71,15 +75,17 @@ class Solution {
     return 1;
   }
 
-  void updateBucket() {
-    int v = adj.size();
+  void updateRank() {
+    int v = adj.size(), n=max_degree;
 
     for (int i = 0; i < v; i++) {
-      int cur = INT_MAX;
+      int cur = max_degree;
       for (int adj_node : adj[i]) {
         cur = min(cur, degree[adj_node]);
       }
       bucket[i] = cur;
+      rank[i] = (n*n*(n - bucket[i]) + n*degree[i]);
+      if(!visited[i]) rank[i]++;
     }
   }
 
@@ -89,9 +95,12 @@ class Solution {
       if (visited[i] && degree[i] == 0) continue;
       if (!visited[i] && in_adj[i].empty()) return i;
 
-      if (cur == -1 || bucket[i] < bucket[cur] || (bucket[i] == bucket[cur] && degree[i] > degree[cur]) || (bucket[i] == bucket[cur] && degree[i] == degree[cur] && visited[cur])) {
-        cur = i;
-      }
+      // if (cur == -1 || bucket[i] < bucket[cur] || (bucket[i] == bucket[cur] && degree[i] > degree[cur]) || (bucket[i] == bucket[cur] && degree[i] == degree[cur] && visited[cur])) {
+      //   cur = i;
+      // }
+
+      if(cur == -1 || rank[i] > rank[cur]) cur = i;
+
     }
     return cur;
   }
@@ -104,7 +113,7 @@ class Solution {
        count += visit(adj_node);
     count += visit(node);
 
-    updateBucket();
+    updateRank();
     return count;
   }
 
