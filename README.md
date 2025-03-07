@@ -7,7 +7,7 @@ This repository is a testing and development ground for finding (ideally) a mini
 1. Fill the `adj_list.txt` file following the given template:
    - The **first line** should contain the number of vertices.
    - The **following lines** should contain the adjacency list for each vertex.
-2. After preparing the input file, run the C++ program.
+2. After preparing the input file, compile and run the main.cpp program.
 3. The console will display a valid (and potentially minimal) dominating set for the given graph.
 
 ---
