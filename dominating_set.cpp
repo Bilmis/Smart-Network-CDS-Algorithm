@@ -92,7 +92,7 @@ class Solution {
       if (visited[i] && degree[i] == 0) continue;
       if (!visited[i] && in_adj[i].empty()) return i;
 
-      if (cur == -1 || bucket[i] < bucket[cur] || (bucket[i] == bucket[cur] && degree[i] > degree[cur])) {
+      if (cur == -1 || bucket[i] < bucket[cur] || (bucket[i] == bucket[cur] && degree[i] > degree[cur]) || (bucket[i] == bucket[cur] && degree[i] == degree[cur] && visited[cur])) {
         cur = i;
       }
     }
@@ -115,8 +115,6 @@ public:
   vector<int> dominatingSet(vector<vector<int>>& adj_list) {
     vector<int> set;
     initList(adj_list);
-
-    // show_stats();
 
     int rem = adj_list.size();
     while (rem > 0) {
@@ -204,19 +202,22 @@ void printGraph(const vector<vector<int>> &adj) { // Use 'const' to prevent modi
 
 int main() {
   vector<vector<int>> adj;
-  // inputGraph(adj);
   inputGraphFile(adj);
-  // printGraph(adj);
 
   Solution sol;
   vector<int> d_set = sol.dominatingSet(adj);
   cout<<"\ndominating set: ";
   for(int d: d_set) cout<<d<<" ";
-  cout<<endl;
+  cout<<" { "<<d_set.size()<<" }"<<endl;
 
   TestKit tk;
-  cout<<"verification of minimality:\n "<<tk.isMinimalSet(adj, d_set)<<"\n";
-  cout<<"verification of domination: "<<tk.isDominatingSet(adj, d_set);
+  cout<<"verification of minimality: ";
+  tk.isMinimalSet(adj, d_set);
+
+  cout<<"\nverification of domination: "<<(tk.isDominatingSet(adj, d_set)?"true":"false");
+
+  cout<<"\nverification of minimum case: ";
+  tk.isMinimumSet(adj, d_set);
 
   return 0;
 }

@@ -10,13 +10,10 @@ class TestKit {
 
   void generateSubsets(vector<int>& subset, int start, int v, int n, const vector<vector<int>>& adj_list) {
     if (subset.size() == n) {
-
-        for(int x: subset) cout<<x<<" ";
         
         if(isDominatingSet(adj_list, subset)) 
         status = false;
 
-        cout<<(status ? "true" : "false")<<endl;
         return;
     }
 
@@ -49,10 +46,16 @@ public:
   }
 
   bool isMinimumSet(const vector<vector<int>>& adj_list, const vector<int>& vertex_set) {
-      vector<int> subset;
+    // if(adj_list.size() > 25) {
+    //   cout<<"File too large ";
+    //   return true;
+    // }  
+    
+    vector<int> subset;
       status = true;
       generateSubsets(subset,0,adj_list.size(),vertex_set.size()-1, adj_list);
 
+      cout<<(status ? "It is minimum" : "It is not min")<<endl;
       return status;
   }
 
@@ -63,41 +66,14 @@ public:
         vector<int> temp_set = vertex_set;
         temp_set.erase(temp_set.begin() + i); // Remove one element
 
-        for(int x: temp_set) cout<<x<<" ";
-
         if (isDominatingSet(adj_list, temp_set)) {
-            cout<<"false"<<endl;
-            return false; // Not minimal since a smaller set still dominates
+          cout<<" Found smaller set, remove { "<<vertex_set[i]<<" }";
+          
+          return false; // Not minimal since a smaller set still dominates
         }
 
-        cout<<"true"<<endl;
     }
-
+    cout<<"Minimality verified";
     return true; // If no subset dominates, it's minimal
   }
 };
-
-// int main() {
-//     vector<vector<int>> adj_list = {
-//         {1, 2}, 
-//         {0, 2, 3}, 
-//         {0, 1, 3}, 
-//         {1, 2} 
-//     };
-
-//     TestKit tk;
-//     vector<int> vertex_set = {1, 3}; // Example dominating set
-
-//     if (tk.isDominatingSet(vertex_set)) {
-//         cout << "The given set is a dominating set." << endl;
-//         if (tk.isMinimumSet(adj_list, vertex_set)) {
-//             cout << "The set is the minimum dominating set." << endl;
-//         } else {
-//             cout << "The set is NOT the minimum dominating set." << endl;
-//         }
-//     } else {
-//         cout << "The given set is NOT a dominating set." << endl;
-//     }
-
-//     return 0;
-// }
