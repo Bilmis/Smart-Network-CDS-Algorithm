@@ -46,7 +46,7 @@ class TestKit {
 
   int isMinimum(const vector<int>& vertex_set) {
     
-    if(adj.size() > 25) {
+    if(adj.size() > 35) {
       return -1;
     }  
     

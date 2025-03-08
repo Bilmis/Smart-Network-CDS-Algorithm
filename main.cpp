@@ -161,10 +161,10 @@ int main() {
 
   compareSets(tk);
 
-  // if(set2.size() < 100){
-  //   cout<<"Set 2: ";
-  //   printSet(set2);
-  // }
+  if(set2.size() > 0 && set2.size() < 100){
+    cout<<"Set 2: ";
+    printSet(set2);
+  }
   
   return 0;
 }
