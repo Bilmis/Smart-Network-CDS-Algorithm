@@ -29,13 +29,47 @@ void inputGraph(vector<vector<int>> &adj) {
   }
 }
 
-void inputGraphFile(vector<vector<int>> &adj) {
+bool isValid(vector<vector<int>> &adj) {
+  // Test if graph given is undirected and contains no self loop or parallel edge
+  int v = adj.size();
+  vector<unordered_set<int>> map(v);
+
+  for(int i=0; i<v; i++) {
+    for(int adj_node: adj[i]) {
+
+      if(i == adj_node) {
+        cout<<"Self Loop found at "<<i<<"\n";
+        return false;
+      }
+
+      if(map[i].find(adj_node) != map[i].end()) {
+        cout<<"Parallel Edge found \n";
+        return false;
+      }
+
+      map[i].insert(adj_node);
+    }
+  }
+
+  for(int i=0; i<v; i++) {
+    for(int adj_node: map[i]) {
+      if(map[adj_node].find(i) == map[adj_node].end()) {
+        cout<<"Directed edge found\n";
+        return false;
+      }
+    }
+  }
+
+  return true; 
+}
+
+bool inputGraphFile(vector<vector<int>> &adj) {
   string filename = "adj_list.txt";
   ifstream ifs(filename);
 
   if(!ifs.is_open()) {
     cout<<"Error";
-    return;
+    return false;
   }
 
   string line;
@@ -60,6 +94,8 @@ void inputGraphFile(vector<vector<int>> &adj) {
         adj[i].push_back(num);
     }
   }
+
+  return true;
 }
 
 void printGraph(const vector<vector<int>> &adj) { // Use 'const' to prevent modification
@@ -81,9 +117,8 @@ void printRow(TestKit &tk, vector<int>& set, string name) {
 }
 
 void compareSets(TestKit &tk) {
-  cout<<"Algo\t order\t dom\t minl\t min\n";
+  cout<<"Algo\t Order\t Dom\t MinL\t Min\n";
 
-  printRow(tk, set1, "set1");
   printRow(tk, set2, "set2");
   printRow(tk, mdg, "mdg");
   printRow(tk, mdf, "mdf");
@@ -95,17 +130,24 @@ void compareSets(TestKit &tk) {
   cout<<endl;
 }
 
+void printSet(vector<int>& set) {
+  cout<<"Order = "<<set.size()<<endl;
+  for(int x: set) cout<< x << " ";
+  cout<<endl;
+}
+
 int main() {
   vector<vector<int>> adj;
   inputGraphFile(adj);
+  if(!isValid(adj)) return 1;
+  cout<<"Graph verified. Size = "<<adj.size()<<endl;
+
 
   TestKit tk(adj);
   CompareKit ck(adj);
 
-  Solution sol;
   Solution2 sol2;
 
-  set1 = sol.dominatingSet(adj);
   set2 = sol2.dominatingSet(adj);
 
   mdg = ck.maxDegreeGreedy();
@@ -117,36 +159,33 @@ int main() {
 
   compareSets(tk);
 
-  // printGraph(adj);
-
-  // Solution sol;
-  // vector<int> d_set = sol.dominatingSet(adj);
-  // cout<<"\nDominating set: ";
-  // if(d_set.size() < 25) for(int d: d_set) cout<<d<<" ";
-  // cout<<" {"<<d_set.size()<<"}"<<endl;
-
-  // tk.isDominatingSet(d_set);
-  // tk.isMinimalSet(d_set);
-  // tk.isMinimumSet(d_set);
-
-  // cout<<"\n------------set 2-------------\n";
-
-
-  // Solution2 sol2;
-  // vector<int> d_set2 = sol2.dominatingSet(adj);
-  // cout<<"\nDominating set: ";
-  // if(d_set2.size() < 15) for(int d: d_set2) cout<<d<<" ";
-  // cout<<" {"<<d_set2.size()<<"}"<<endl;
-
-  // tk.isDominatingSet(d_set2);
-  // tk.isMinimalSet(d_set2);
-  // tk.isMinimumSet(d_set2);
-
-  // cout<<"\n------------set 3-------------\n";
-
-  // cout<<endl;
-  // CompareKit(adj).Run();
-  // cout<<endl;
-
+  if(set2.size() < 100){
+    cout<<"Set 2: ";
+    printSet(set2);
+  }
+  
   return 0;
 }
+
+
+// for(int i=0; i<v; i++) {
+//   vector<int> temp(adj[i].begin(), adj[i].end());
+//   sort(temp.begin(), temp.end());
+
+//   if(binary_search(temp.begin(), temp.end(), i)) {
+//     cout<<"Contains self loop. Exit\n";
+//     return false;
+//   }
+
+//   for(int j=0; j<temp.size(); j++) {
+//     if(j > 0 && temp[j-1] == temp[j]) {
+//       cout<<"Contains parallel edges. Exit\n";
+//       return false;
+//     }
+
+//     int node = temp[j];
+//     if(count(adj[node].begin(), adj[node].end(), i) == 0) {
+//       cout<<"Directed graph. No"<<node<<" -> "<<i<<". Exit\n";
+//       return false;
+//     }
+//   }

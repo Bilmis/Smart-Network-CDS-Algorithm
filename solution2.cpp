@@ -8,36 +8,6 @@ class Solution2 {
   vector<int> degree, utility;
   vector<bool> visited;
 
-  bool isValid(vector<vector<int>> &adj) {
-    // Test if graph given is undirected and contains no self loop or parallel edge
-    int v = adj.size();
-
-    for(int i=0; i<v; i++) {
-      vector<int> temp(adj[i].begin(), adj[i].end());
-      sort(temp.begin(), temp.end());
-
-      if(binary_search(adj[i].begin(), adj[i].end(), i)) {
-        cout<<"Contains self loop. Exit\n";
-        return false;
-      }
-
-      for(int j=0; j<temp.size(); j++) {
-        if(j > 0 && temp[j-1] == temp[j]) {
-          cout<<"Contains parallel edges. Exit\n";
-          return false;
-        }
-
-        int node = temp[j];
-        if(count(adj[node].begin(), adj[node].end(), i) == 0) {
-          cout<<"Directed graph. No"<<node<<" -> "<<i<<". Exit\n";
-          return false;
-        }
-      }
-    }
-
-    return true; 
-  }
-
   void initialise(vector<vector<int>> &adj_list, int &max_deg) {
     int v = adj_list.size();
     adj = adj_list;
@@ -90,14 +60,14 @@ class Solution2 {
 
   void visit(int node) {
     // when visiting the node first time
-    if(!visited[node]) {
-      degree_map[degree[node]].erase(node);
-      visited[node] = true;
-      utility[node]--;
+    if(visited[node]) return;
 
-      // decrease every incoming edge utility
-      for(int adj_node: adj[node]) utility[adj_node]--;
-    }
+    degree_map[degree[node]].erase(node);
+    visited[node] = true;
+    utility[node]--;
+
+    // decrease every incoming edge utility
+    for(int adj_node: adj[node]) utility[adj_node]--;
   }
 
   void dominate(int node) {
@@ -126,8 +96,6 @@ class Solution2 {
   public:
   vector<int> dominatingSet(vector<vector<int>> &adj_list) {
     vector<int> res;
-    if(!isValid(adj_list)) return res;
-    cout<<"\nGraph validity confirmed.\n";
 
     int max_deg = 0;
     initialise(adj_list, max_deg);
