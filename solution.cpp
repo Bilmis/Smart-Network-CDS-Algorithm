@@ -128,7 +128,6 @@ public:
     int rem = adj_list.size();
     while (rem > 0) {
       int cur_node = getVertex();
-      cout<<cur_node<<" ";
       if (cur_node == -1) break;
       int new_visit = dominate(cur_node);
 

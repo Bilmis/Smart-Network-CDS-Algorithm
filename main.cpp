@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 #include "solution.cpp"
 #include "test-kit.cpp"
+#include "solution2.cpp"
 
 
 void inputGraph(vector<vector<int>> &adj) {
@@ -65,25 +66,38 @@ void printGraph(const vector<vector<int>> &adj) { // Use 'const' to prevent modi
         for (int x : adj[i]) {
             cout << x << " ";
         }
-        cout << endl;
+        cout << "\n";
     }
 }
 
 int main() {
   vector<vector<int>> adj;
+  TestKit tk;
   inputGraphFile(adj);
   // printGraph(adj);
 
   Solution sol;
   vector<int> d_set = sol.dominatingSet(adj);
-  cout<<"\ndominating set: ";
+  cout<<"\nDominating set: ";
   for(int d: d_set) cout<<d<<" ";
   cout<<" {"<<d_set.size()<<"}"<<endl;
 
-  TestKit tk;
   tk.isDominatingSet(adj, d_set);
   tk.isMinimalSet(adj, d_set);
   tk.isMinimumSet(adj, d_set);
+
+  cout<<"\n------------set 2-------------\n";
+
+
+  Solution2 sol2;
+  vector<int> d_set2 = sol2.dominatingSet(adj);
+  cout<<"\nDominating set: ";
+  for(int d: d_set2) cout<<d<<" ";
+  cout<<" {"<<d_set2.size()<<"}"<<endl;
+
+  tk.isDominatingSet(adj, d_set2);
+  tk.isMinimalSet(adj, d_set2);
+  tk.isMinimumSet(adj, d_set2);
 
   return 0;
 }
