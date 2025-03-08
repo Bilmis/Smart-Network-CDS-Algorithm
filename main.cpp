@@ -4,7 +4,7 @@
 #include "solution2.cpp"
 #include "compare-kit.cpp"
 
-vector<int> set1, set2;
+vector<int> set1, set2, set3;
 vector<int> mdg, mdf, wd, rg, mrd, ld;
 
 void inputGraph(vector<vector<int>> &adj) {
@@ -120,6 +120,7 @@ void compareSets(TestKit &tk) {
   cout<<"Algo\t Order\t Dom\t MinL\t Min\n";
 
   printRow(tk, set2, "set2");
+  printRow(tk, set3, "set3");
   printRow(tk, mdg, "mdg");
   printRow(tk, mdf, "mdf");
   printRow(tk, wd, "wd");
@@ -149,6 +150,7 @@ int main() {
   Solution2 sol2;
 
   set2 = sol2.dominatingSet(adj);
+  set3 = tk.minimalise(set2);
 
   mdg = ck.maxDegreeGreedy();
   mdf = ck.minDegreeFirst();
@@ -159,10 +161,10 @@ int main() {
 
   compareSets(tk);
 
-  if(set2.size() < 100){
-    cout<<"Set 2: ";
-    printSet(set2);
-  }
+  // if(set2.size() < 100){
+  //   cout<<"Set 2: ";
+  //   printSet(set2);
+  // }
   
   return 0;
 }

@@ -120,4 +120,15 @@ public:
 
   }
 
+  vector<int> minimalise(const vector<int>& set) {
+    vector<int> res(set.begin(), set.end());
+    int repeated = isMinimal(res);
+    
+    while(repeated != -1) {
+      res.erase(remove(res.begin(), res.end(), repeated), res.end());
+      repeated = isMinimal(res);
+    }
+
+    return res;
+  }
 };
