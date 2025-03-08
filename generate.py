@@ -1,7 +1,7 @@
 import random
 
-# Generate a random undirected graph with 100+ vertices
-num_vertices = random.randint(15,25)  # Randomly choosing between 100 and 120 vertices
+# Generate a random undirected graph with x+ vertices
+num_vertices = random.randint(5,10)  # Randomly choosing between x and y vertices
 
 # Create adjacency list representation
 random_graph_adj_list = {i: set() for i in range(num_vertices)}

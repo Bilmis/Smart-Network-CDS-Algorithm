@@ -78,15 +78,11 @@ int main() {
   vector<int> d_set = sol.dominatingSet(adj);
   cout<<"\ndominating set: ";
   for(int d: d_set) cout<<d<<" ";
-  cout<<" { "<<d_set.size()<<" }"<<endl;
+  cout<<" {"<<d_set.size()<<"}"<<endl;
 
   TestKit tk;
-  cout<<"verification of minimality: ";
+  tk.isDominatingSet(adj, d_set);
   tk.isMinimalSet(adj, d_set);
-
-  cout<<"\nverification of domination: "<<(tk.isDominatingSet(adj, d_set)?"true":"false");
-
-  cout<<"\nverification of minimum case: ";
   tk.isMinimumSet(adj, d_set);
 
   return 0;

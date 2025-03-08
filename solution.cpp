@@ -98,11 +98,11 @@ class Solution {
       if (visited[i] && degree[i] == 0) continue;
       if (!visited[i] && in_adj[i].empty()) return i;
 
-      // if (cur == -1 || bucket[i] < bucket[cur] || (bucket[i] == bucket[cur] && degree[i] > degree[cur]) || (bucket[i] == bucket[cur] && degree[i] == degree[cur] && visited[cur])) {
-      //   cur = i;
-      // }
+      if (cur == -1 || bucket[i] < bucket[cur] || (bucket[i] == bucket[cur] && degree[i] > degree[cur]) || (bucket[i] == bucket[cur] && degree[i] == degree[cur] && visited[cur])) {
+        cur = i;
+      }
 
-      if(cur == -1 || rank[i] > rank[cur]) cur = i;
+      // if(cur == -1 || rank[i] > rank[cur]) cur = i;
 
     }
     return cur;
@@ -128,7 +128,7 @@ public:
     int rem = adj_list.size();
     while (rem > 0) {
       int cur_node = getVertex();
-
+      cout<<cur_node<<" ";
       if (cur_node == -1) break;
       int new_visit = dominate(cur_node);
 
