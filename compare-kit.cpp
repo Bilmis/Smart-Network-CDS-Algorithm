@@ -153,7 +153,7 @@ public:
         return domSet;
     }
 
-    int Run() {
+    int RunAll() {
         
         vector<int> mdg = maxDegreeGreedy();
         vector<int> mdf = minDegreeFirst();
@@ -162,25 +162,25 @@ public:
         vector<int> mrd = minResidualDegree();
         vector<int> ld = lookaheadDegree();
     
-        TestKit tk;
+        TestKit tk(adj);
 
         cout << "Max Degree Greedy: " << mdg.size() << "\t";
-        tk.isDominatingSet(adj, mdg);
+        tk.isDominatingSet(mdg);
 
         cout << "Min Degree First: " << mdf.size() << "\t";
-        tk.isDominatingSet(adj, mdf);
+        tk.isDominatingSet(mdf);
 
         cout << "Weighted Degree: " << wd.size() << "\t";
-        tk.isDominatingSet(adj, wd);
+        tk.isDominatingSet(wd);
 
         cout << "Random Greedy: " << rg.size() << "\t";
-        tk.isDominatingSet(adj, rg);
+        tk.isDominatingSet(rg);
 
         cout << "Min Residual Degree: " << mrd.size() << "\t";
-        tk.isDominatingSet(adj, mrd);
+        tk.isDominatingSet(mrd);
 
         cout << "Lookahead Degree: " << ld.size() << "\t";
-        tk.isDominatingSet(adj, ld);
+        tk.isDominatingSet(ld);
     
         return 0;
     }
@@ -189,20 +189,20 @@ public:
 };
 
 // Function to generate a random graph
-vector<vector<int>> generateRandomGraph(int n, double prob) {
-    vector<vector<int>> graph(n);
-    random_device rd;
-    mt19937 gen(rd());
-    uniform_real_distribution<> dis(0, 1);
+// vector<vector<int>> generateRandomGraph(int n, double prob) {
+//     vector<vector<int>> graph(n);
+//     random_device rd;
+//     mt19937 gen(rd());
+//     uniform_real_distribution<> dis(0, 1);
 
-    for (int i = 0; i < n; i++) {
-        for (int j = i + 1; j < n; j++) {
-            if (dis(gen) < prob) {
-                graph[i].push_back(j);
-                graph[j].push_back(i);
-            }
-        }
-    }
-    return graph;
-}
+//     for (int i = 0; i < n; i++) {
+//         for (int j = i + 1; j < n; j++) {
+//             if (dis(gen) < prob) {
+//                 graph[i].push_back(j);
+//                 graph[j].push_back(i);
+//             }
+//         }
+//     }
+//     return graph;
+// }
 
