@@ -2,7 +2,7 @@
 #include "solution.cpp"
 #include "test-kit.cpp"
 #include "solution2.cpp"
-
+#include "compare-kit.cpp"
 
 void inputGraph(vector<vector<int>> &adj) {
   int v;
@@ -79,7 +79,7 @@ int main() {
   Solution sol;
   vector<int> d_set = sol.dominatingSet(adj);
   cout<<"\nDominating set: ";
-  for(int d: d_set) cout<<d<<" ";
+  if(d_set.size() < 25) for(int d: d_set) cout<<d<<" ";
   cout<<" {"<<d_set.size()<<"}"<<endl;
 
   tk.isDominatingSet(adj, d_set);
@@ -92,12 +92,18 @@ int main() {
   Solution2 sol2;
   vector<int> d_set2 = sol2.dominatingSet(adj);
   cout<<"\nDominating set: ";
-  for(int d: d_set2) cout<<d<<" ";
+  if(d_set2.size() < 15) for(int d: d_set2) cout<<d<<" ";
   cout<<" {"<<d_set2.size()<<"}"<<endl;
 
   tk.isDominatingSet(adj, d_set2);
   tk.isMinimalSet(adj, d_set2);
   tk.isMinimumSet(adj, d_set2);
+
+  cout<<"\n------------set 3-------------\n";
+
+  cout<<endl;
+  CompareKit(adj).Run();
+  cout<<endl;
 
   return 0;
 }

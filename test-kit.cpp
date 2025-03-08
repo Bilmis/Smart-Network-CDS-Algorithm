@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <limits.h>
+#pragma once
+
 
 using namespace std;
 
