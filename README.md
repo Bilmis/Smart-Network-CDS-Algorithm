@@ -19,7 +19,7 @@ There are **two ways** to provide the adjacency list for the graph:
 Alternatively, you can generate a random graph using the provided Python scripts in the `GraphGenerators` folder:
 
 - **For Split Graphs** → Run `split.py`
-- **For Random Undirected Graphs** → Run `undirected.py`
+- **For Undirected Graphs** → Run `undirected.py`
 
 **Steps:**
 
