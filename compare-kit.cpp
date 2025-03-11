@@ -1,13 +1,34 @@
+/* 
+   A utility class implementing multiple heuristic algorithms for finding Dominating Sets (DS) in a graph.
+   Useful for performance comparison and benchmarking different approaches.
+*/
+
 #include <bits/stdc++.h>
 #include "test-kit.cpp"
 using namespace std;
 
 class CompareKit {
-public:
-    vector<vector<int>> adj;
-    vector<bool> visited;
-    vector<int> degree;
+    vector<vector<int>> adj;  // Adjacency list representation of the graph
+    vector<bool> visited;     // Tracks visited (dominated) nodes
+    vector<int> degree;       // Stores degree of each node
 
+    // Resets the visited status of all nodes
+    void reset() {
+        fill(visited.begin(), visited.end(), false);
+    }
+
+    // Marks a node and its neighbors as visited (dominated)
+    int visit(int node) {
+        if (visited[node]) return 0;
+        visited[node] = true;
+        for (int neighbor : adj[node]) 
+            visited[neighbor] = true;
+        return 1;
+    }
+
+public:
+
+    // Constructor: Initializes the adjacency list and computes node degrees
     CompareKit(vector<vector<int>>& graph) {
         adj = graph;
         int n = adj.size();
@@ -17,17 +38,7 @@ public:
             degree[i] = adj[i].size();
     }
 
-    void reset() {
-        fill(visited.begin(), visited.end(), false);
-    }
-
-    int visit(int node) {
-        if (visited[node]) return 0;
-        visited[node] = true;
-        for (int neighbor : adj[node]) visited[neighbor] = true;
-        return 1;
-    }
-
+    // Greedy algorithm: Selects nodes with the highest degree first
     vector<int> maxDegreeGreedy() {
         reset();
         vector<int> domSet;
@@ -47,6 +58,7 @@ public:
         return domSet;
     }
 
+    // Greedy algorithm: Selects nodes with the lowest degree first
     vector<int> minDegreeFirst() {
         reset();
         vector<int> domSet;
@@ -66,6 +78,7 @@ public:
         return domSet;
     }
 
+    // Greedy algorithm: Selects nodes based on weighted degree (sum of neighbors' degrees)
     vector<int> weightedDegree() {
         reset();
         vector<int> domSet;
@@ -90,6 +103,7 @@ public:
         return domSet;
     }
 
+    // Greedy algorithm: Randomized selection of nodes
     vector<int> randomGreedy() {
         reset();
         vector<int> domSet;
@@ -107,6 +121,7 @@ public:
         return domSet;
     }
 
+    // Greedy algorithm: Selects nodes with the smallest residual degree
     vector<int> minResidualDegree() {
         reset();
         vector<int> domSet;
@@ -128,6 +143,7 @@ public:
         return domSet;
     }
 
+    // Lookahead greedy algorithm: Selects nodes based on maximum coverage of unvisited nodes
     vector<int> lookaheadDegree() {
         reset();
         vector<int> domSet;
@@ -152,43 +168,13 @@ public:
 
         return domSet;
     }
-
-    int RunAll() {
-        
-        vector<int> mdg = maxDegreeGreedy();
-        vector<int> mdf = minDegreeFirst();
-        vector<int> wd = weightedDegree();
-        vector<int> rg = randomGreedy();
-        vector<int> mrd = minResidualDegree();
-        vector<int> ld = lookaheadDegree();
-    
-        TestKit tk(adj);
-
-        cout << "Max Degree Greedy: " << mdg.size() << "\t";
-        tk.isDominatingSet(mdg);
-
-        cout << "Min Degree First: " << mdf.size() << "\t";
-        tk.isDominatingSet(mdf);
-
-        cout << "Weighted Degree: " << wd.size() << "\t";
-        tk.isDominatingSet(wd);
-
-        cout << "Random Greedy: " << rg.size() << "\t";
-        tk.isDominatingSet(rg);
-
-        cout << "Min Residual Degree: " << mrd.size() << "\t";
-        tk.isDominatingSet(mrd);
-
-        cout << "Lookahead Degree: " << ld.size() << "\t";
-        tk.isDominatingSet(ld);
-    
-        return 0;
-    }
-    
-
 };
 
-// Function to generate a random graph
+/* ============================== */
+/*      IGNORE BELOW CODE         */
+/* ============================== */
+
+// Function to generate a random graph with given probability
 // vector<vector<int>> generateRandomGraph(int n, double prob) {
 //     vector<vector<int>> graph(n);
 //     random_device rd;
@@ -206,3 +192,34 @@ public:
 //     return graph;
 // }
 
+// Function to run all heuristics and compare performance
+// int RunAll() {
+//     vector<int> mdg = maxDegreeGreedy();
+//     vector<int> mdf = minDegreeFirst();
+//     vector<int> wd = weightedDegree();
+//     vector<int> rg = randomGreedy();
+//     vector<int> mrd = minResidualDegree();
+//     vector<int> ld = lookaheadDegree();
+
+//     TestKit tk(adj);
+
+//     cout << "Max Degree Greedy: " << mdg.size() << "\t";
+//     tk.isDominatingSet(mdg);
+
+//     cout << "Min Degree First: " << mdf.size() << "\t";
+//     tk.isDominatingSet(mdf);
+
+//     cout << "Weighted Degree: " << wd.size() << "\t";
+//     tk.isDominatingSet(wd);
+
+//     cout << "Random Greedy: " << rg.size() << "\t";
+//     tk.isDominatingSet(rg);
+
+//     cout << "Min Residual Degree: " << mrd.size() << "\t";
+//     tk.isDominatingSet(mrd);
+
+//     cout << "Lookahead Degree: " << ld.size() << "\t";
+//     tk.isDominatingSet(ld);
+
+//     return 0;
+// }

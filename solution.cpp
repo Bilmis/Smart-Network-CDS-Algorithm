@@ -1,3 +1,9 @@
+/* 
+  This is an earlier version of the solution algorithm.
+  It is more complex and less efficient compared to Solution2,
+  which provides a more optimized and streamlined implementation.
+*/
+
 #include<bits/stdc++.h>
 using namespace std;
 

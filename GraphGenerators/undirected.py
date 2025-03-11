@@ -1,43 +1,57 @@
 import random
 
-# Generate a random undirected graph with x+ vertices
-num_vertices = random.randint(30,35)  # Randomly choosing between x and y vertices
+# Define the range for the number of vertices
+MIN_VERTICES = 20  # Lower bound
+MAX_VERTICES = 35  # Upper bound
 
-# Create adjacency list representation
-random_graph_adj_list = {i: set() for i in range(num_vertices)}
+def is_valid_range(a, b):
+    """Checks if the given range is valid where b > a and both are positive integers."""
+    return isinstance(a, int) and isinstance(b, int) and a > 0 and b > 0 and b > a
 
-# Add random edges (ensuring no self-loops and no duplicate edges)
-num_edges = random.randint(num_vertices * 2, num_vertices * 4)  # Controlling edge density
+def generate_random_undirected_graph(num_vertices):
+    """Generates a random undirected graph with a given number of vertices."""
+    if num_vertices < 2:
+        raise ValueError("An undirected graph must have at least 2 vertices.")
 
-for _ in range(num_edges):
-    u, v = random.sample(range(num_vertices), 2)  # Pick two distinct vertices
-    random_graph_adj_list[u].add(v)
-    random_graph_adj_list[v].add(u)  # Since the graph is undirected
+    # Initialize adjacency list
+    adjacency_list = {i: set() for i in range(num_vertices)}
 
-# Convert sets to sorted lists for consistency
-random_graph_adj_list = {k: sorted(list(v)) for k, v in random_graph_adj_list.items()}
+    # Define edge count range to control density
+    min_edges = num_vertices * 2
+    max_edges = num_vertices * 4
+    num_edges = random.randint(min_edges, max_edges)
 
-# Format output similar to given format
-output_str = f"// Number of vertices\n{num_vertices}\n//"
-for node, neighbors in random_graph_adj_list.items():
-    output_str += f"{node} {' '.join(map(str, neighbors))}\n"
+    # Add random edges while ensuring no self-loops or duplicate edges
+    for _ in range(num_edges):
+        u, v = random.sample(range(num_vertices), 2)  # Pick two distinct vertices
+        adjacency_list[u].add(v)
+        adjacency_list[v].add(u)  # Since the graph is undirected
 
-# Display the adjacency list
-output_str
+    # Convert adjacency list from sets to sorted lists
+    adjacency_list = {k: sorted(list(v)) for k, v in adjacency_list.items()}
+    return adjacency_list
 
-# Remove vertex numbers from each line
-file_path_no_vertex = "adj_list.txt"
+def save_graph_as_adjacency_list(adj_list, filename="adj_list.txt"):
+    """Saves the graph's adjacency list representation to a file."""
+    num_vertices = len(adj_list)
 
-# Process output to remove leading vertex numbers
-lines = output_str.split("\n")
-processed_lines = [line.split(" ", 1)[1] if " " in line else "" for line in lines[2:]]  # Skip first two comment lines
+    with open(filename, "w") as f:
+        f.write(f"// Number of vertices\n{num_vertices}\n")
+        f.write("// Adjacency list\n")
+        for node, neighbors in adj_list.items():
+            f.write(f"{' '.join(map(str, neighbors))}\n")
 
-# Reconstruct output string
-output_str_no_vertex = "// Number of vertices\n" + str(num_vertices) + "\n// Adj list\n" + "\n".join(processed_lines)
+if __name__ == "__main__":
+    # Validate range before proceeding
+    if not is_valid_range(MIN_VERTICES, MAX_VERTICES):
+        print("Error: Invalid vertex range. Ensure MIN_VERTICES < MAX_VERTICES and both are positive integers.")
+        exit()
 
-# Save to a new file
-with open(file_path_no_vertex, "w") as file:
-    file.write(output_str_no_vertex)
+    # Randomly select the number of vertices within the given range
+    num_vertices = random.randint(MIN_VERTICES, MAX_VERTICES)
 
-# Return file path for download
-file_path_no_vertex
+    # Generate the undirected graph and save it
+    random_graph = generate_random_undirected_graph(num_vertices)
+    save_graph_as_adjacency_list(random_graph)
+
+    print(f"Generated a random undirected graph with {num_vertices} vertices and saved it to 'adj_list.txt'.")
