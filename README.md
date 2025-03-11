@@ -16,7 +16,7 @@ There are **two ways** to provide the adjacency list for the graph:
 
 #### **Option 2: Auto-Generate Using Python Scripts**
 
-Alternatively, you can generate a random graph using the provided Python scripts in the `GenerateGraph` folder:
+Alternatively, you can generate a random graph using the provided Python scripts in the `GraphGenerators` folder:
 
 - **For Split Graphs** → Run `split.py`
 - **For Random Undirected Graphs** → Run `undirected.py`
@@ -50,7 +50,7 @@ The console will display a valid (and potentially minimal) dominating set for th
 
 ```
 GraphDominatingSet/
-│── GenerateGraph/      # Folder containing Python scripts for generating graphs
+│── GraphGenerators/    # Folder containing Python scripts for generating graphs
 │   ├── split.py        # Generates split graphs
 │   ├── undirected.py   # Generates random undirected graphs
 │── adj_list.txt        # Adjacency list input file
