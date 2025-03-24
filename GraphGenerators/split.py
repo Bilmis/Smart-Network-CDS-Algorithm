@@ -1,9 +1,10 @@
 import random
 import networkx as nx
+import sys
 
 # Define the range for the number of vertices
-MIN_VERTICES = 10  # Lower bound
-MAX_VERTICES = 12  # Upper bound
+MIN_VERTICES = 30  # Lower bound
+MAX_VERTICES = 45  # Upper bound
 
 def is_valid_range(a, b):
     """Checks if a and b define a valid range where b > a and both are positive integers."""
@@ -63,4 +64,5 @@ if __name__ == "__main__":
     split_graph = generate_random_split_graph(num_vertices)
     save_graph_as_adjacency_list(split_graph)
 
-    print(f"Generated a split graph with {num_vertices} vertices and saved it to 'adj_list.txt'.")
+    if len(sys.argv) < 2:
+        print(f"Generated a split graph with {num_vertices} vertices and saved it to 'adj_list.txt'.")
