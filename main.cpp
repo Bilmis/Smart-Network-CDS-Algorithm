@@ -4,7 +4,8 @@
 #include "solution2.cpp"
 #include "compare-kit.cpp"
 
-vector<int> set1, set2, set3;
+vector<int> set2;
+//, set3;
 vector<int> mdg, mdf, wd, rg, mrd, ld;
 
 // Function to take graph input from the user
@@ -56,6 +57,7 @@ bool isValid(vector<vector<int>> &adj) {
     for(int adj_node: map[i]) {
       if(map[adj_node].find(i) == map[adj_node].end()) {
         cout<<"Directed edge found\n";
+        cout <<adj_node << " " << i << endl;
         return false;
       }
     }
@@ -123,8 +125,8 @@ void printRow(TestKit &tk, vector<int>& set, string name) {
 // Function to compare different dominating set algorithms
 void compareSets(TestKit &tk) {
   cout<<"Algo\t Order\t Dom\t MinL\t Min\n";
-  printRow(tk, set2, "set2");
-  printRow(tk, set3, "set3");
+  printRow(tk, set2, "set");
+  //printRow(tk, set3, "set3");
   printRow(tk, mdg, "mdg");
   printRow(tk, mdf, "mdf");
   printRow(tk, wd, "wd");
@@ -156,7 +158,7 @@ int main() {
 
   // Compute dominating sets using different approaches
   set2 = sol2.dominatingSet(adj);
-  set3 = tk.minimalise(set2);
+  //set3 = tk.minimalise(set2);
   mdg = ck.maxDegreeGreedy();
   mdf = ck.minDegreeFirst();
   wd = ck.weightedDegree();
@@ -169,7 +171,7 @@ int main() {
 
   // Print the results if the set is within a reasonable size
   if(set2.size() > 0 && set2.size() < 100){
-    cout<<"Set 2: ";
+    cout<<"MCDS: ";
     printSet(set2);
   }
   

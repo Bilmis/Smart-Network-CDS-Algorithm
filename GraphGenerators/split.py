@@ -2,8 +2,8 @@ import random
 import networkx as nx
 
 # Define the range for the number of vertices
-MIN_VERTICES = 20  # Lower bound
-MAX_VERTICES = 35  # Upper bound
+MIN_VERTICES = 10  # Lower bound
+MAX_VERTICES = 12  # Upper bound
 
 def is_valid_range(a, b):
     """Checks if a and b define a valid range where b > a and both are positive integers."""

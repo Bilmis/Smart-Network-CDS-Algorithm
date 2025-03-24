@@ -1,8 +1,8 @@
 import random
 
 # Define the range for the number of vertices
-MIN_VERTICES = 20  # Lower bound
-MAX_VERTICES = 35  # Upper bound
+MIN_VERTICES = 200  # Lower bound
+MAX_VERTICES = 350  # Upper bound
 
 def is_valid_range(a, b):
     """Checks if the given range is valid where b > a and both are positive integers."""
