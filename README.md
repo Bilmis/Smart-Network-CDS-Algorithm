@@ -7,9 +7,15 @@ Through this Orginal Algorithm we were able to devise a polynomial-time O(V+E) a
 👉[Check out the Algorithm Report](https://drive.google.com/file/d/1Zq58jHW5a0obCcVvh65G6b6pctpDcfeS/view?usp=drive_link)
 
 ## Minimal Connected Dominating Set Overview
+
+[What are Connected Dominating Set?](https://en.wikipedia.org/wiki/Connected_dominating_set)
+
 ![](https://github.com/Bilmis/Smart-Network-CDS-Algorithm/blob/main/images/MCDS.png)
 
 ## Split Graphs
+
+[What are Split Graphs?](https://en.wikipedia.org/wiki/Split_graph)
+
 ![](https://github.com/Bilmis/Smart-Network-CDS-Algorithm/blob/main/images/input_graph.jpg)
 
 ## Algorithm
