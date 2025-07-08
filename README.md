@@ -8,8 +8,34 @@ Through this Orginal Algorithm we were able to devise a polynomial-time O(V+E) a
 
 ## Minimal Connected Dominating Set Overview
 ![](https://github.com/Bilmis/Smart-Network-CDS-Algorithm/blob/main/images/MCDS.png)
+
+## Split Graphs
+![](https://github.com/Bilmis/Smart-Network-CDS-Algorithm/blob/main/images/input_graph.jpg)
+
 ## Algorithm
 ![](https://github.com/Bilmis/Smart-Network-CDS-Algorithm/blob/main/images/Algorithm2.png)
+
+## Complexity Comparison
+Complexity of the devised algorithm: O(N^2)
+
+Complexity of the existing algorithm: O(1.308^N)
+
+![](https://github.com/Bilmis/Smart-Network-CDS-Algorithm/blob/main/images/comparison_graph.png)
+
+## Result Analysis
+Split graph with 80 nodes
+
+![Split graph with 80 nodes](https://github.com/Bilmis/Smart-Network-CDS-Algorithm/blob/main/images/80nodes.png)
+
+
+Split graph with 100 nodes
+
+![Split graph with 100 nodes](https://github.com/Bilmis/Smart-Network-CDS-Algorithm/blob/main/images/100nodes.png)
+
+
+
+## How to Run
+
 
 ### 1️⃣ Prepare the Input Graph
 
