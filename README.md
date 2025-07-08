@@ -1,4 +1,4 @@
-# Optimal Algorithm- Minmal Connected Dominating Set in Split Graphs
+# Optimal Algorithm- Minimal Connected Dominating Set in Split Graphs
 
 This repository is dedicated to testing and developing algorithms for finding a minimal dominating set(MCDS) in a random graph. Currently, the algorithm is designed for **small, undirected, and unweighted graphs** and is not yet optimized for performance.
 
