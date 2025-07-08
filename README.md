@@ -4,10 +4,12 @@ This repository is dedicated to testing and developing algorithms for finding a 
 
 Through this Orginal Algorithm we were able to devise a polynomial-time O(V+E) algorithm for the NP-Complete Problem of finding a Minimal Connnected Dominating Set in Split Graphs
 
-👉 [Check out the Algorithm Report](https://drive.google.com/file/d/1Zq58jHW5a0obCcVvh65G6b6pctpDcfeS/view?usp=drive_link)
+👉[Check out the Algorithm Report](https://drive.google.com/file/d/1Zq58jHW5a0obCcVvh65G6b6pctpDcfeS/view?usp=drive_link)
 
+## Minimal Connected Dominating Set Overview
+![](https://github.com/Bilmis/Smart-Network-CDS-Algorithm/blob/main/images/MCDS.png)
 ## Algorithm
-
+![](https://github.com/Bilmis/Smart-Network-CDS-Algorithm/blob/main/images/Algorithm2.png)
 
 ### 1️⃣ Prepare the Input Graph
 
