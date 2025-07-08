@@ -2,7 +2,12 @@
 
 This repository is dedicated to testing and developing algorithms for finding a minimal dominating set in a random graph. Currently, the algorithm is designed for **small, undirected, and unweighted graphs** and is not yet optimized for performance.
 
-## 📌 How to Use
+Through this Orginal Algorithm we were able to devise a polynomial-time O(V+E) algorithm for the NP-Complete Problem of finding a Minimal Connnected Dominating Set in Split Graphs
+
+👉 [Check out the Algorithm Report](https://drive.google.com/file/d/1Zq58jHW5a0obCcVvh65G6b6pctpDcfeS/view?usp=drive_link)
+
+## Algorithm
+
 
 ### 1️⃣ Prepare the Input Graph
 
