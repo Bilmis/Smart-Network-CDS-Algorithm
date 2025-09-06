@@ -2,7 +2,7 @@
 
 This repository is dedicated to testing and developing algorithms for finding a minimal dominating set(MCDS) in a random graph. Currently, the algorithm is designed for **small, undirected, and unweighted graphs** and is not yet optimized for performance.
 
-## This project was selected for the College Accreditation Visit 2025
+## This project was selected for our College's Accreditation Visit 2025
 
 Through this Original Algorithm we were able to devise a polynomial-time O(V+E) algorithm for the NP-Complete Problem of finding a Minimal Connnected Dominating Set in Split Graphs
 
